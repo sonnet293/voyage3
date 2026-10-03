@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <title>Battleroom - 3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/lobby.css">
+</head>
+<body class="station page-lobby">
+
+    <header class="topbar">
+        <span class="brand"><i class="led on"></i><span>BATTLE FRONTIER</span><small class="hide-sm">// ROOM 03</small></span>
+        <span class="grow"></span>
+        <span class="hide-sm">LINK <b>ESTABLISHED</b></span>
+        <span><span class="hide-sm">UTC </span><b data-clock>--:--:--</b></span>
+    </header>
+
+    <main class="lobby">
+        <section class="lobby-hero" id="lobby-hero">
+            <span class="status-pill" id="room-status" data-status="waiting"><i></i><span>대기 중</span></span>
+            <span class="eyebrow">ROOM 03 · 대기실</span>
+            <h1 id="room-name">Battleroom - 3</h1>
+        </section>
+
+        <div id="swap-status" class="swap-banner" role="status" hidden></div>
+
+        <section class="versus">
+            <article id="player1" class="player-card hud" data-state="empty"></article>
+            <div class="versus-mark">VS</div>
+            <article id="player2" class="player-card hud" data-state="empty"></article>
+        </section>
+
+        <p id="lobby-hint" class="lobby-hint"></p>
+
+        <section class="spectators hud">
+            <header><h2>관전자</h2><span class="count-badge" id="spectator-count">0</span></header>
+            <ul id="spectator-list" class="spectator-list"></ul>
+        </section>
+    </main>
+
+    <footer class="lobby-actions">
+        <button type="button" id="leaveBtn" class="btn btn-ghost">LEAVE</button>
+        <button type="button" id="readyBtn" class="btn btn-primary" aria-pressed="false" hidden>READY</button>
+    </footer>
+
+    <div class="crt" aria-hidden="true"></div>
+
+    <script>
+        const ROOM_ID = "battleroom3";
+    </script>
+    <script src="../js/hud.js" defer></script>
+    <script type="module" src="../js/battleroom.js"></script>
+
+</body>
+</html>

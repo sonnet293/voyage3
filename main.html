@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <title>Battle Frontier | Main</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body class="station page-main">
+
+    <header class="topbar">
+        <a class="brand" href="main.html"><i class="led on"></i><span>BATTLE FRONTIER</span><small class="hide-sm">// VOYAGER NODE 03</small></a>
+        <span class="grow"></span>
+        <span class="hide-sm">UTC <b data-clock>--:--:--</b></span>
+        <div class="topbar-actions">
+            <a class="trainer-chip" href="profile.html" title="트레이너 카드">
+                <span class="initial avatar-box" id="trainer-initial">?</span>
+                <span class="label" id="trainer-name">트레이너</span>
+            </a>
+            <button type="button" class="text-btn" id="logoutBtn">로그아웃</button>
+        </div>
+    </header>
+
+    <main class="main-wrap">
+        <div class="main-head">
+            <div>
+                <p class="cmdline"><span class="dim">trainer@voyager:~$</span> voyager rooms --list</p>
+                <span class="eyebrow">BATTLE ROOM</span>
+                <h1>배틀룸 선택</h1>
+            </div>
+            <div id="room-summary" class="room-summary"></div>
+        </div>
+
+        <div id="room-grid" class="room-grid"></div>
+
+        <p class="main-foot"><span class="dim">[SYS]</span> 배틀룸을 선택하면 보안 채널이 연결됩니다.</p>
+    </main>
+
+    <div class="crt" aria-hidden="true"></div>
+
+    <script src="js/hud.js" defer></script>
+    <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
