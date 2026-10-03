@@ -52,7 +52,7 @@ body.page-lobby { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 }
 /* 회전하는 스윕 */
 .lobby-hero::after {
-  background: conic-gradient(from 0deg, rgba(255, 255, 255, 0.22), transparent 22%);
+  background: conic-gradient(from 0deg, rgba(255, 176, 0, 0.35), transparent 22%);
   animation: sweep 4s linear infinite;
 }
 @keyframes sweep {
@@ -68,8 +68,8 @@ body.page-lobby { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
   justify-content: space-between;
   gap: 10px 16px;
   padding: 12px 16px;
-  border: 1px solid var(--fg);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
   animation: rise 0.35s ease-out;
 }
 .swap-text { font-size: 0.9em; }
@@ -77,7 +77,7 @@ body.page-lobby { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
   content: "[REQ]";
   margin-right: 0.6em;
   padding: 0 0.3em;
-  background: var(--fg);
+  background: var(--accent);
   color: var(--bg);
   text-shadow: none;
 }
@@ -118,7 +118,8 @@ body.page-lobby { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
   top: 10px;
   right: 12px;
   padding: 0 0.5em;
-  border: 1px solid var(--fg);
+  border: 1px solid var(--accent-line);
+  color: var(--accent);
   font-size: 0.64em;
   letter-spacing: 0.2em;
 }
@@ -126,9 +127,9 @@ body.page-lobby { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 .player-card[data-state="empty"] { --c: var(--faint); border-style: dashed; border-color: var(--line); }
 .player-card[data-state="empty"] .player-name { color: var(--dim); }
 .player-card[data-state="ready"] {
-  --c: var(--fg);
-  border-color: var(--line);
-  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.05);
+  --c: var(--accent);
+  border-color: var(--accent-line);
+  box-shadow: inset 0 0 40px var(--accent-soft);
 }
 
 .profile-link {
@@ -175,8 +176,8 @@ body.page-lobby { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
   letter-spacing: 0.2em;
 }
 .player-card[data-state="ready"] .ready-badge {
-  border-color: var(--fg);
-  background: var(--fg);
+  border-color: var(--accent);
+  background: var(--accent);
   color: var(--bg);
   font-weight: 700;
   text-shadow: none;
@@ -218,7 +219,7 @@ body.page-lobby { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
   background: rgba(0, 0, 0, 0.5);
   animation: rise 0.3s ease-out;
 }
-.spectator-chip[data-me="true"] { border-color: var(--fg); }
+.spectator-chip[data-me="true"] { border-color: var(--accent-line); }
 .spectator-avatar { width: 26px; height: 26px; font-size: 0.8em; }
 .profile-link.inline { flex-direction: row; gap: 8px; font-size: 0.85em; }
 .spectator-list .empty { color: var(--dim); font-size: 0.85em; }
@@ -241,9 +242,14 @@ body.page-lobby { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
   backdrop-filter: blur(6px);
 }
 .lobby-actions .btn { min-width: 150px; }
-#readyBtn[aria-pressed="true"] { animation: ready-pulse 1.6s ease-in-out infinite; }
+#readyBtn[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+  animation: ready-pulse 1.6s ease-in-out infinite;
+}
 @keyframes ready-pulse {
-  50% { box-shadow: 0 0 26px rgba(255, 255, 255, 0.45); }
+  50% { box-shadow: 0 0 26px rgba(255, 176, 0, 0.55); }
 }
 
 /* ── 트레이너 카드 팝업 ───────────────────────── */

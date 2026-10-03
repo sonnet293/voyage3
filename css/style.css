@@ -14,6 +14,12 @@
   --glass: rgba(255, 255, 255, 0.025);
   --glow: 0 0 0.35em rgba(255, 255, 255, 0.28);
 
+  /* 포인트 색 (앰버 계기판) — '살아 있는 정보'에만 사용 */
+  --accent: #ffb000;
+  --accent-soft: rgba(255, 176, 0, 0.14);
+  --accent-line: rgba(255, 176, 0, 0.45);
+  --accent-glow: 0 0 0.5em rgba(255, 176, 0, 0.55);
+
   --fs: clamp(13px, 0.3vw + 12px, 15px);
   --lh: 1.6;
   --pad: clamp(16px, 4vw, 40px);
@@ -120,7 +126,7 @@ h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: 0.06em; line-height: 1
   vertical-align: 0;
 }
 .brand .led { margin: 0; }
-.led.on { background: var(--fg); border-color: var(--fg); box-shadow: 0 0 6px var(--fg); }
+.led.on { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 6px var(--accent); }
 .led.blink { animation: blink 0.8s steps(1) infinite; }
 
 /* ── 텍스트 ───────────────────────── */
@@ -131,7 +137,7 @@ h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: 0.06em; line-height: 1
   letter-spacing: 0.24em;
   text-transform: uppercase;
 }
-.eyebrow::before { content: "// "; }
+.eyebrow::before { content: "// "; color: var(--accent); }
 
 .dim { color: var(--dim); }
 
@@ -193,7 +199,7 @@ h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: 0.06em; line-height: 1
   cursor: pointer;
 }
 .text-btn:hover { color: var(--fg); }
-.text-btn::before { content: "> "; opacity: 0; transition: opacity 0.15s; }
+.text-btn::before { content: "> "; color: var(--accent); opacity: 0; transition: opacity 0.15s; }
 .text-btn:hover::before { opacity: 1; }
 
 /* ── 상태 표시 ───────────────────────── */
@@ -216,13 +222,18 @@ h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: 0.06em; line-height: 1
   border-radius: 50%;
 }
 :is(.status-pill[data-status="waiting"], [data-status="waiting"] .status-pill) i {
-  background: var(--fg);
+  background: var(--accent);
+  border-color: var(--accent);
   animation: blink 1.2s steps(1) infinite;
 }
-:is(.status-pill[data-status="playing"], [data-status="playing"] .status-pill) { border-color: var(--fg); }
+:is(.status-pill[data-status="playing"], [data-status="playing"] .status-pill) {
+  border-color: var(--accent-line);
+  color: var(--accent);
+  text-shadow: var(--accent-glow);
+}
 :is(.status-pill[data-status="playing"], [data-status="playing"] .status-pill) i {
-  background: var(--fg);
-  box-shadow: 0 0 6px var(--fg);
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
 }
 :is(.status-pill[data-status="ended"], [data-status="ended"] .status-pill) { color: var(--dim); }
 :is(.status-pill[data-status="ended"], [data-status="ended"] .status-pill) i { background: var(--dim); }

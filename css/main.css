@@ -15,7 +15,7 @@
   color: var(--fg);
   transition: border-color 0.15s, background 0.15s;
 }
-.trainer-chip:hover { border-color: var(--fg); background: rgba(255, 255, 255, 0.06); }
+.trainer-chip:hover { border-color: var(--accent-line); background: var(--accent-soft); }
 .trainer-chip .initial { width: 24px; height: 24px; border: 0; font-size: 0.95em; }
 .trainer-chip .label { max-width: 14ch; overflow: hidden; text-overflow: ellipsis; letter-spacing: 0.04em; }
 
@@ -47,7 +47,8 @@
   height: 1.05em;
   margin-left: 0.3em;
   vertical-align: text-bottom;
-  background: var(--fg);
+  background: var(--accent);
+  box-shadow: var(--accent-glow);
   animation: blink 1.05s steps(1) infinite;
 }
 
@@ -74,10 +75,10 @@
 .room-card:nth-child(n + 4) { animation-delay: 0.4s; }
 
 .room-card:hover,
-.room-card:focus-visible { --c: var(--fg); border-color: var(--line); outline: none; }
+.room-card:focus-visible { --c: var(--accent); border-color: var(--accent-line); outline: none; box-shadow: 0 0 24px rgba(255, 176, 0, 0.08); }
 .room-card[aria-disabled="true"] { pointer-events: none; opacity: 0.5; }
 
-/* 상단 비주얼: 방 배경(있으면) + 격자 */
+/* 상단 비주얼: 성운 배경 (아래 '성운 배경' 섹션) */
 .room-visual {
   position: relative;
   display: flex;
@@ -88,11 +89,7 @@
   padding: 12px 14px;
   overflow: hidden;
   border-bottom: 1px solid var(--faint);
-  background:
-    linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2)),
-    var(--room-bg, none) center / cover no-repeat,
-    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 22px);
+  background: #030303;
 }
 .room-no {
   position: absolute;
@@ -105,7 +102,7 @@
 }
 .room-mine {
   padding: 0.15em 0.6em;
-  background: var(--fg);
+  background: var(--accent);
   color: var(--bg);
   font-size: 0.68em;
   font-weight: 700;
@@ -119,7 +116,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(to bottom, transparent 46%, rgba(255, 255, 255, 0.14) 50%, transparent 54%);
+  background: linear-gradient(to bottom, transparent 46%, rgba(255, 176, 0, 0.22) 50%, transparent 54%);
   animation: scan 2.6s linear infinite;
 }
 
@@ -142,7 +139,7 @@
 .seat-ready {
   justify-self: start;
   padding: 0 0.45em;
-  background: var(--fg);
+  background: var(--accent);
   color: var(--bg);
   font-size: 0.62em;
   font-weight: 700;
@@ -152,7 +149,7 @@
 .seat-ready:empty { display: none; }
 .seat[data-empty="true"] { border-style: dashed; border-color: var(--line); }
 .seat[data-empty="true"] .seat-name { color: var(--dim); }
-.seat[data-winner="true"] { border-color: var(--fg); box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.08); }
+.seat[data-winner="true"] { border-color: var(--accent-line); box-shadow: inset 0 0 18px var(--accent-soft); }
 
 .room-foot {
   display: flex;
@@ -165,7 +162,7 @@
   font-size: 0.78em;
 }
 .room-watchers { color: var(--dim); }
-.room-cta { flex: none; font-weight: 700; letter-spacing: 0.06em; }
+.room-cta { flex: none; color: var(--accent); font-weight: 700; letter-spacing: 0.06em; text-shadow: var(--accent-glow); }
 .room-card:hover .room-cta { animation: blink 0.9s steps(1) infinite; }
 
 /* ── 반응형 ───────────────────────── */
@@ -177,3 +174,41 @@
 @media (max-width: 400px) {
   .brand > span { display: none; } /* 아주 좁은 화면: LED만 남김 */
 }
+
+/* ==========================================================
+   성운 배경 — 마우스를 따라 일렁임 (js/nebula.js가 --mx, --my를 넣어 줌)
+   rooms.js에 방 배경 이미지(bg)를 넣으면 그 이미지를 대신 사용
+   ========================================================== */
+.room-visual > * { z-index: 1; }
+.room-visual > :not(.room-no) { position: relative; }
+
+.room-visual::before {
+  content: "";
+  position: absolute;
+  inset: -14%; /* 움직여도 가장자리가 드러나지 않도록 여유 */
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.1) 60%),
+    var(--room-bg, url("../img/nebula.jpg")) var(--crop, 50% 50%) / cover no-repeat;
+  /* 마우스 반대 방향으로 살짝 밀림 + 천천히 숨 쉬듯 확대/회전 */
+  translate: calc(var(--mx, 0) * -22px) calc(var(--my, 0) * -14px);
+  filter: var(--tint, none) saturate(1.1) brightness(0.85);
+  animation: nebula-breathe 14s ease-in-out infinite alternate;
+  transition: filter 0.4s;
+  will-change: translate, scale;
+}
+.room-card:hover .room-visual::before { filter: var(--tint, none) saturate(1.25) brightness(1.05); }
+
+@keyframes nebula-breathe {
+  0% { scale: 1; rotate: 0deg; }
+  50% { scale: 1.06; rotate: 0.8deg; }
+  100% { scale: 1.02; rotate: -0.6deg; }
+}
+
+/* 같은 사진이라도 방마다 다른 부분 + 다른 색감 */
+.room-card:nth-child(3n + 1) .room-visual { --crop: 45% 55%; }
+.room-card:nth-child(3n + 2) .room-visual { --crop: 70% 30%; --tint: hue-rotate(150deg); }
+.room-card:nth-child(3n) .room-visual { --crop: 25% 70%; --tint: hue-rotate(235deg); }
+.room-card:nth-child(3n + 2) .room-visual::before { animation-delay: -5s; }
+.room-card:nth-child(3n) .room-visual::before { animation-delay: -9s; }
+.room-visual[style*="--room-bg"] { --tint: none; }
