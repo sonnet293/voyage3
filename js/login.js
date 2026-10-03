@@ -436,7 +436,22 @@ if (window.visualViewport) {
 
 // ── 시작 ─────────────────────────────────────
 
-boot().then(() => {
+// 화면이 켜지는 연출(power-on: 가운데 가로줄 → 위아래로 펼침)이 끝난 뒤에 타이핑 시작
+// (도중에 시작하면 왼쪽 아래 글자가 펼쳐지는 화면에 끌려 위에서 내려오는 것처럼 보임)
+function poweredOn() {
+  return new Promise((resolve) => {
+    if (getComputedStyle($screen).animationName === "none") return resolve();
+    const done = (e) => {
+      if (e && e.target !== $screen) return;
+      $screen.removeEventListener("animationend", done);
+      resolve();
+    };
+    $screen.addEventListener("animationend", done);
+    setTimeout(done, 1000); // animationend가 안 오는 경우 대비
+  });
+}
+
+poweredOn().then(boot).then(() => {
   speed = 1;
   burst = reduceMotion;
   $skip.hidden = true;
