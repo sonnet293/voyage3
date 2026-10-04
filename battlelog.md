@@ -1,9 +1,10 @@
-```text
+<!--시작 로그-->
 [VOYAGER SYSTEM TERMINAL]
 SONNET LABORATORY // TRAINER RESEARCH NETWORK
 BUILD VGR.26.10.03-R7
 ────────────────────────────────────────────────────
 
+<!--일반 로그(랜덤 출력)-->
 [19:03:21.004] SYS     Initializing VOYAGER runtime environment...
 [19:03:21.018] SYS     Loading core modules...
 [19:03:21.041] CORE    voyager.kernel loaded
@@ -300,10 +301,6 @@ BUILD VGR.26.10.03-R7
 [19:03:28.161] SYS     ............................................
 [19:03:28.187] SYS     Process allowed.
 
-[19:03:28.214] SONNET  "건드리지 마."
-
-[19:03:28.861] SONNET  "아니, 잠깐. 건드려도 돼."
-
 [19:03:28.887] SYS     User instruction conflict detected.
 [19:03:28.912] SYS     Defaulting to STANDBY.
 
@@ -340,8 +337,6 @@ BUILD VGR.26.10.03-R7
 [19:03:29.628] RES     Cause....................................... TRAINER DECISION
 [19:03:29.653] RES     Unexpected event............................ CONFIRMED
 [19:03:29.678] RES     Research value.............................. EXCEPTIONAL
-
-[19:03:29.705] SONNET  "이런 걸 기다렸어."
 
 [19:03:29.732] ARCH    Saving anomaly report R-185002...
 [19:03:29.757] ARCH    Saved.
@@ -398,4 +393,88 @@ BUILD VGR.26.10.03-R7
 [19:03:31.027] AUTH    Awaiting trainer identification.
 
 [19:03:31.078] AUTH    >_
-```
+
+[OBS] frame=018294
+[TLM] signal stable
+[SIM] prediction Δ 0.031
+[TRK] target lock maintained
+[ENV] field integrity 99.8%
+[PKM] vital stream nominal
+[OBS] movement detected
+[NET] packet 0x19AF received
+[CALC] evaluating next state...
+[SIM] branch 04 discarded
+[SIM] branch 07 retained
+[TRK] vector +0.18 / -0.04
+[SYS] telemetry buffer 41%
+[OBS] trainer input detected
+[PKM] response latency 112ms
+[CALC] probability matrix updated
+[FIELD] spatial sync nominal
+[OBS] behavioral sample acquired
+[SIM] recalculating...
+[DATA] sample #A81F stored
+[VOY] observation continues
+
+<!--공격 로그-->
+[OBS] trainer input detected
+[CMD] battle instruction received
+[PKM] command relay established
+[ACT] action request acknowledged
+
+> MOVE EXECUTION DETECTED
+
+[SIM] calculating expected outcome...
+[SIM] branch count 128 <!--숫자 랜덤-->
+[SIM] branch count 256
+[SIM] branch count 512
+
+[PRED] impact probability 0.941
+[PRED] critical probability 0.063
+[PRED] secondary effect pending
+
+[OBS] execution started
+
+<!--피격 로그-->
+>>> IMPACT
+
+[OBS] CONTACT CONFIRMED
+[TLM] SIGNAL SPIKE +++++++++++++++++
+[PKM] VITAL CHANGE DETECTED
+[DMG] calculating...
+[DMG] calculating...
+[DMG] calculating...
+
+[DMG] RESULT = 84
+[HP ] 143 > 59
+[HP ] Δ -58.74%
+
+[TYPE] effectiveness check
+[TYPE] coefficient = 2.000
+
+[EFFECT] SUPER EFFECTIVE
+
+[SIM] previous prediction invalidated
+[SIM] recalculating battle state
+
+branch_018..............discard
+branch_019..............discard
+branch_020..............discard
+branch_021..............discard
+branch_022..............retain
+
+[OBS] target survived
+[OBS] battle continues
+
+[DATA] EVENT STORED
+[DATA] ID #VGR-81A9-FF02
+
+<!--피격 로그 중간중간 랜덤으로 섞어놓는 로그-->
+0x08F1 :: 31 8A 0C FF 17
+VGR/TLM/PKM_02 >> 0183.441
+ΔV +0.0031 / ΔP -0.0182
+OBS::A91C::7F02::0001
+SIM[03] > BRANCH//ACCEPT
+PKM_SIG 88:14:AF:02
+{04.188,-01.441,+00.091}
+BUFFER::██████░░ 71%

@@ -351,6 +351,11 @@ async function submitPassword() {
     .then(() => null, (err) => err.code || "unknown");
 
   gap();
+  await verify(attempt);
+}
+
+// 비밀번호 입력 이후의 인증 로그 → 성공/실패 처리
+async function verify(attempt) {
   await line("[AUTH] Credential packet received.");
   await lead("[AUTH] Encrypting", "OK");
   await lead("[AUTH] Verifying signature", "OK");
@@ -451,7 +456,16 @@ function poweredOn() {
   });
 }
 
-poweredOn().then(boot).then(() => {
+Promise.all([poweredOn(), auth.authStateReady()]).then(async () => {
+  // 이미 로그인된 브라우저 → 부팅·입력 생략하고 인증 로그부터 출력 후 main으로
+  if (auth.currentUser) {
+    stage = "busy";
+    $skip.hidden = true;
+    await verify(Promise.resolve(null));
+    return;
+  }
+
+  await boot();
   speed = 1;
   burst = reduceMotion;
   $skip.hidden = true;
